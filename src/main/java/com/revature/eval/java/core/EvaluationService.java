@@ -1,6 +1,9 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +33,13 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String str[]=phrase.split("[-\\s]");
+		String tla="";
+		for(int i=0;i<str.length;i++) {
+			String first=str[i].substring(0, 1);
+			tla+=first.toUpperCase();
+		}
+		return tla;
 	}
 
 	/**
@@ -84,17 +92,23 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			if(sideOne==sideTwo && sideTwo==sideThree) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			if((sideOne==sideThree && sideOne!=sideTwo)||(sideTwo==sideThree&&sideThree!=sideOne)||(sideThree==sideOne && sideOne!=sideTwo)) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if(sideOne!=sideTwo && sideTwo!=sideThree && sideOne!=sideTwo) {
+				return true;
+			}
 			return false;
 		}
 
@@ -116,8 +130,31 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		String letter=string.toLowerCase();
+		int score=0;
+		for(int i=0;i<letter.length();i++) {
+	
+		switch(letter.charAt(i)) {
+		case 'a':case 'e':case'i':case 'o':case 'u':case 'l':case 'n':case 'r':case 's':case 't': score+=1;
+		break;
+		case 'd':case 'g': score+=2;
+		break;
+		case 'b':case 'c':case 'm':case 'p': score+=3;
+		break;
+		case 'f':case 'h':case 'v':case 'w':case 'y': score+=4;
+		break;
+		case 'k': score+=5;
+		break;
+		case 'j':case 'x': score+=8;
+		break;
+		case 'q':case 'z': score+=10;
+		default:
+			break;
+		}
+	
+		}
+	
+		return score;
 	}
 
 	/**
@@ -152,8 +189,16 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		String str=string.replaceAll("[^0-9]","");
+		for(int i=0;i<str.length();i++) {
+		if(string.length()==10) {
+			return str;
+		}else if(string.length()!=10){
+			throw new IllegalArgumentException("i must be vaild");
+		}
+		}
+		return str;
 	}
 
 	/**
@@ -166,8 +211,21 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		Map<String,Integer> map=new HashMap<>();
+		String st=string.replace("\n","");
+		String str[]=st.split(",|\\s");
+		
+		for(String str1:str) {
+			String word = str1.toLowerCase();
+			if(map.containsKey(str1)){
+				int count=map.get(word);
+				map.put(word, count + 1);
+			}else 
+				map.put(word, 1);
+
+		}
+		return map;
 	}
 
 	/**
@@ -246,9 +304,27 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
-	}
+	    String str=new String();
+		for(int i=0; i<string.length();i++) {
+			if(string.charAt(0)=='a'||string.charAt(0)=='e'||string.charAt(0)=='i'||string.charAt(0)=='o'||string.charAt(0)=='u') {
+				 str=string.concat("ay");
+			}
+			else { 
+				for(int j=0;j<string.length();j++) {
+					if(string.charAt(j)!='a'||string.charAt(j)!='e'||string.charAt(j)!='i'||string.charAt(j)!='o'||string.charAt(j)!='u') {
+						String st=null;
+						st.concat(
+					}
+				}
+				char ch=string.charAt(0);
+				str=string.substring(1)+ch;
+				str=str.concat("ay");
+				}
+		}
+			 return str;
+		}
+
+	    
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
@@ -266,7 +342,23 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+		int number, rem, result = 0, n = 0;
+
+        number = input;
+
+        for (;number != 0; number /= 10, ++n);
+
+        number = input;
+
+        for (;number != 0; number /= 10)
+        {
+            rem = number % 10;
+            result += Math.pow(rem, n);
+        }
+        if(result == input)
+           return true;
+        else
+           
 		return false;
 	}
 
@@ -281,8 +373,16 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> arr=new ArrayList<>();
+		 for(int i = 2; i<= l; i++) {
+	         while(l%i == 0) {
+	             arr.add((long) i);
+	             l/=i;
+	         }
+		 }
+	      
+		return arr;
+		
 	}
 
 	/**
@@ -320,8 +420,28 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			 String result= new String(); 
+			  
+		        for (int i=0; i<string.length(); i++) 
+		        { 
+		            if (Character.isUpperCase(string.charAt(i))) 
+		            { 
+		                char ch = (char)(((int)string.charAt(i) + 
+		                                  key - 65) % 26 + 65); 
+		                result= result+""+ch; 
+		            } 
+		            else if(Character.isLowerCase(string.charAt(i)))
+		            { 
+		                char ch = (char)(((int)string.charAt(i) + 
+		                                  key - 97) % 26 + 97); 
+		                result= result+""+ch; 
+		            } 
+		            else {
+		            	char ch=(char)string.charAt(i);
+		            	result= result+""+ch; 
+		            }
+		        } 
+		        return result; 
 		}
 
 	}
@@ -338,9 +458,25 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
+	private static boolean checkPrime(int n) {
+		    for(int i = 2; i < n; ++i) {
+		        if (n % i == 0) {
+		            
+		            return false;
+		        }
+		    }return true;
+	}
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		 int num, count;
+		    for(num = 2, count = 0; count < i; ++num) {
+		        if (checkPrime(num)) {
+		            ++count;
+		        }
+		    }
+		   
+		    return num-1;
+		
 	}
 
 	/**
@@ -433,9 +569,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+		boolean[] alphaList = new boolean[26]; 
+	      int index = 0;
+	      int flag = 1;
+	      for (int i = 0; i < string.length(); i++) {
+	         if ( string.charAt(i) >= 'A' && string.charAt(i) <= 'Z') {
+	            index = string.charAt(i) - 'A'; 
+	         }else if( string.charAt(i) >= 'a' &&  string.charAt(i) <= 'z') {
+	            index = string.charAt(i) - 'a'; 
+	         }
+	         alphaList[index] = true; 
+	      }
+	      for (int i = 0; i <= 25; i++) {
+	         if (alphaList[i] == false)
+	            flag = 0;
+	      }
+	      
+	      if (flag == 1)
+	         return true;
+	      else
+	        
+	      return false;
+	   }
+		
+	
 
 	/**
 	 * 17. Calculate the moment when someone has lived for 10^9 seconds.
@@ -537,8 +694,26 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		String str1=string.replace("?", "");
+		String str[]=str1.split(" ");
+		int result=0;
+		for(int i=0;i<str.length;i++) {
+		
+		if(str[3].equals("plus")) {
+			result=Integer.parseInt(str[2])+Integer.parseInt(str[4]);
+		}
+		else if(str[3].equals("minus")) {
+			result=Integer.parseInt(str[2])-Integer.parseInt(str[4]);
+		}
+		else if(str[3].equals("divided")) {
+			result=Integer.parseInt(str[2])/Integer.parseInt(str[5]);
+		}
+		else if(str[3].equals("multiplied")) {
+				result=Integer.parseInt(str[2])*Integer.parseInt(str[5]);
+			}
+		}
+		return result;
 	}
 
 }
