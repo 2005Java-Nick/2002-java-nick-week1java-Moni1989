@@ -311,14 +311,12 @@ public class EvaluationService {
 			}
 			else { 
 				for(int j=0;j<string.length();j++) {
-					if(string.charAt(j)!='a'||string.charAt(j)!='e'||string.charAt(j)!='i'||string.charAt(j)!='o'||string.charAt(j)!='u') {
+					if(string.charAt(j)!='a'&& string.charAt(j)!='e'&& string.charAt(j)!='i'&& string.charAt(j)!='o'&& string.charAt(j)!='u') {
 						String st=null;
-						st.concat(
+						st.concat(st);
 					}
 				}
-				char ch=string.charAt(0);
-				str=string.substring(1)+ch;
-				str=str.concat("ay");
+				
 				}
 		}
 			 return str;
